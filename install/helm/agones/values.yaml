@@ -24,8 +24,12 @@ agones:
     stackdriverLabels: ""
   rbacEnabled: true
   registerServiceAccounts: true
-  registerWebhooks: true
-  registerApiService: true
+  registerWebhooks:
+    enabled: true
+    annotations: {}
+  registerApiService:
+    enabled: true
+    annotations: {}
   crds:
     install: true
     cleanupOnDelete: true
@@ -41,6 +45,7 @@ agones:
       #   memory: 256Mi
     nodeSelector: {}
     annotations: {}
+    env: {}
     tolerations:
     - key: "agones.dev/agones-system"
       operator: "Equal"
@@ -172,6 +177,17 @@ agones:
     allocator:
       name: agones-allocator
       pullPolicy: IfNotPresent
+  extensions:
+    certificate:
+      enabled: false
+      caBundle: ""
+      apiVersion: cert-manager.io/v1alpha3
+      issuer:
+        kind: ""
+        name: ""
+      keySize: 4096
+      keyAlgorithm: rsa
+      keyEncoding: pkcs1
 
 gameservers:
   namespaces:

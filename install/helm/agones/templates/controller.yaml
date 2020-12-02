@@ -129,6 +129,9 @@ spec:
               fieldPath: metadata.namespace
         - name: CONTAINER_NAME
           value: "agones-controller"
+{{- if .Values.agones.controller.extraEnv }}
+        {{- toYaml .Values.agones.controller.extraEnv | nindent 8 }}
+{{- end }}
         livenessProbe:
           httpGet:
             path: /live
